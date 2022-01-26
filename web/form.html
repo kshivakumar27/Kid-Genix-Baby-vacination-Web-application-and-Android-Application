@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="order.css">
+<body>
+
+<div class="topnav">
+  <a href="order.html">Home</a>
+  <a class="active" href="#book">Book</a>
+  <a href="not.php">Register</a>
+  <a href="contact.html">Contact</a>
+  <a href="about.html">About</a>
+  <a style="float:right" href="book.php">Logout</a></li>
+
+</div>
+<div>
+<p></p>
+</div>
+    <div>
+        Day:<input type="text" class="box" id="txtday" />
+        Month:<input type="text" class="box" id="txtMonth" />
+        Year:<input type="text" class="box" id="txtYear" onblur="CalculateAge();" />
+        <input type="button" value="Calculate Age" onclick="CalculateAge();" />
+        <span id="Age"></span>
+        <span id="Mon"></span>
+		<span id="Date"></span>
+		
+
+    </div>
+	
+	<div id="content" ></div>
+    <script type="text/javascript">
+        function CalculateAge() {
+            var curYear = new Date().getUTCFullYear();
+			var d = new Date();
+			var curMon = d.getMonth()+1;
+			var curDay = d.getDate();
+            var Mon=document.getElementById('txtMonth').value;
+            var Day=document.getElementById('txtday').value;
+			if(Mon<=curMon)
+			{
+			var age = curYear - document.getElementById('txtYear').value;
+			var mon = curMon - document.getElementById('txtMonth').value;
+			}
+			
+			else
+			{
+			var age=curYear - document.getElementById('txtYear').value-1;
+			var mon=12 - (document.getElementById('txtMonth').value-curMon);
+			}
+			 if (curDay >= Day)
+			var dateAge = curDay - Day;
+			else {
+				mon--;
+				var dateAge = 31 + curDay - Day;
+
+				if (mon < 0) {
+				mon = 11;
+				age--;
+				}
+			}
+
+			document.getElementById('Age').innerHTML = age;
+			document.getElementById('Mon').innerHTML = mon;
+			document.getElementById('Date').innerHTML = dateAge;
+
+			var el = document.getElementById('content');
+    var content;
+
+    if  (age==0 && mon==1 && dateAge<=14) {
+        content = '<ol class="progtrckr" data-progtrckr-steps="4"> <li class="progtrckr-done">Birth</li><!-- --><li class="progtrckr-todo">6 Weeks</li><!-- --><li class="progtrckr-todo">10 Weeks</li><!-- --><li class="progtrckr-todo">14 Weeks</li>';
+    }
+    if  (mon==2) {
+        content = '<button type="button">Click Me!</button>';
+    }
+
+    el.insertAdjacentHTML('afterbegin', content);
+	
+	
+        }
+	
+    </script>
+
+<a href="reg.php">Book</a>
+ 
+</body>
+</html>
